@@ -1,0 +1,96 @@
+#include<iostream>  //浅拷贝
+#include<string.h>
+using namespace std;
+
+//class String
+//{
+//public:
+//	String(const char *pstr = "") //构造函数
+//	{
+//		if (pstr == NULL)  //如果指针为空，就开辟一个字节空间，放入斜杠0；
+//		{ 
+//			_pstr = new char[1];
+//			*_pstr = '\0';
+//		}
+//		_pstr = new char[strlen(pstr) + 1];//strlen不含斜杠0
+//		strcpy_s (_pstr,strlen(_pstr),pstr);
+//	}
+//	 String  & operator=(const String &s) //赋值运算符的重载
+//	{
+//		 if (this != &s)
+//		 {
+//			 _pstr = s._pstr;
+//		 }
+//		 return *this;
+//	}
+// String 
+//	~String()  //析构函数
+//	{
+//		if (NULL != _pstr)
+//		{
+//			delete[] _pstr;
+//			_pstr = NULL;
+//		}
+//	}
+//
+//private:
+//	char *_pstr;
+//};
+//void funtest()
+//{
+//	String s1;
+//	String s2 = "hello";
+//	String s3 = "meet";
+//	s2 = s3;
+//
+//}
+//int main()
+//{
+//	funtest();
+//	return 0;
+//}
+#include<iostream>  //深拷贝
+using namespace std;
+class  String
+{
+public:
+	String(const char *pstr = "")
+	{
+		strcpy(_pstr,pstr);
+	}
+	String  &operator=(String &s)
+	{
+		if (this != &s)
+		{
+			_pstr = s._pstr;
+			s.count = count;
+			count++;
+		}
+
+	}
+	~String()
+	{
+		if (--count == 0)
+		{
+			delete[]_pstr;
+			_pstr = NULL;
+		}
+	}
+	 
+private:
+    char *_pstr;
+	static int count;
+};
+void funtest()
+{
+	String s1;
+	String s2 = "hello";
+	String s3 = "meet";
+	s2 = s3;
+
+}
+int main()
+{
+	funtest();
+	return 0;
+}
